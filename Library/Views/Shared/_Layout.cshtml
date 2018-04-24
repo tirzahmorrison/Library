@@ -7,35 +7,92 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
+<body ng-app="Library" ng-controller="mainController">
+    <header class="row">
+        <img class="col-sm-3 img-responsive" src="@Url.Content("~/Content/images/dinolibrarian.jpg")" />
+        <h1 class="col-sm-5">CATALOG</h1>
+        <h2 class="col-sm-4">Free Online Library</h2>
+    </header>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
-                    <li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">LIBRARY INFO <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Hours</a></li>
+                            <li><a href="#">Ask Us</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">READER ACCOUNT <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" ng-click="logIn()">Log In</a></li>
+                            <li><a href="#" ng-click="getReaderCheckedOutItems()">Items Out</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">LIBRARIAN ACTIONS <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" ng-click="getCheckedOut()">Check Out Ledger</a></li>
+                            <li><a href="#">Manage Books: </a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Add Books</a></li>
+                            <li><a href="#">Add Authors</a></li>
+                        </ul>
+                    </li>
                 </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <form class="form-horizontal" ng-hide="hideSearch">
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">Email: </label>
+            <div class="col-sm-10">
+                <input ng-model="email" class="form-control" id="inputEmail3" placeholder="">
             </div>
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">Keyword search for: </label>
+            <div class="col-sm-10">
+                <input ng-model="query" class="form-control" id="inputEmail3" placeholder="" ng-keydown="$event.keyCode === 13 && search()">
+                <button class="btn" ng-click="search()">GO</button>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Search by: </label>
+            <div class="col-sm-10">
+                <select ng-model="field" class="form-control">
+                    <option value="title">Title</option>
+                    <option value="genre">Author</option>
+                    <option value="author">Genre</option>
+                    <option value="checkedInStatus">Checked In Status</option>
+                </select>
+            </div>
+        </div>
+    </form>
+
+    <section class="well" ng-repeat="book in books track by $index">
+        {{book.Title}} <a href="#" ng-click="checkOut(book.ID)">Check Out</a>
+    </section>
+
+    <section class="well" ng-repeat="book in bookData track by $index">
+        {{book.BooksData.Title}}
+    </section>
+
+    <section class="well" ng-repeat="book in checkOutList track by $index">
+        {{book.Book.BooksData.Title}} <a href="#" ng-click="checkIn(book.Book.ID)">Check In</a>
+    </section>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/angular")    <!--must load before directives-->
+    @Scripts.Render("~/bundles/angularUiDirectives")
+    @Scripts.Render("~/bundles/main")
+    @RenderBody()
     @RenderSection("scripts", required: false)
 </body>
 </html>

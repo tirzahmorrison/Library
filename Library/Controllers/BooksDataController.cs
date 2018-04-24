@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using System.Linq;
+using System.Web.Http;
 
 namespace Library.Controllers
 {
@@ -29,6 +30,12 @@ namespace Library.Controllers
             db.Authors.Add(author);
             db.SaveChanges();
             return author;
+        }
+        [Route("admin/checkedout")]
+        [HttpGet]
+        public IQueryable<Models.Books> GetCheckedOutBooks()
+        {
+            return db.Books.Where(b => b.IsCheckedOut);
         }
     }
 }

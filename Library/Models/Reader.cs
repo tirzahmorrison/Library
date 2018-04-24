@@ -13,5 +13,6 @@ namespace Library.Models
         public string ReaderName { get; set; }
         public string Email { get; set; }
         public string CardNumber { get; set; }
+        public string Role { get; internal set; }
     }
 }

@@ -186,78 +186,91 @@ namespace Library.Migrations
                     ReaderName = "Luke Skywalker",
                     Email = "MySisterIsHot@hotmail.com",
                     CardNumber = "1-433-011-0988",
+                    Role ="Reader",
                 },
                     new Models.Reader
                 {
                     ReaderName = "Leia Organa",
                     Email = "myTwinIsaPerv@hotmail.com",
                     CardNumber = "1-433-011-0989",
+                    Role ="Reader",
                 },
                     new Models.Reader
                 {
                     ReaderName = "Han Solo",
                     Email = "iShotFirst@hotmail.com",
                     CardNumber = "1-433-011-0984",
+                    Role ="Reader",
                 },
                     new Models.Reader
                 {
                     ReaderName = "Greedo",
                     Email = "NoIshotFirst@hotmail.com",
                     CardNumber = "1-433-011-0970",
+                    Role ="Reader",
                 },
                     new Models.Reader
                 {
                     ReaderName = "Anakin Skywalker",
                     Email = "joinTheDarkside@hotmail.com",
                     CardNumber = "1-433-011-0983",
+                    Role ="Reader",
                 },
                     new Models.Reader
                 {
                     ReaderName = "Ob-Wan Kenobi",
                     Email = "messageMeWhenYouNeedHelp@hotmail.com",
                     CardNumber = "1-433-011-0981",
+                    Role = "Librarian",
                 },
                     new Models.Reader
                 {
                     ReaderName = "R2 D2",
                     Email = "beepBoopBeep@hotmail.com",
                     CardNumber = "1-433-011-0982",
+                    Role = "Librarian",
                 },
                     new Models.Reader
                 {
                     ReaderName = "BB-8",
                     Email = "cuterThanR2@hotmail.com",
                     CardNumber ="1-433-011-0956",
+                    Role = "Librarian",
                 },
                     new Models.Reader
                 {
                     ReaderName = "Sheev Palpatine",
                     Email = "traitorFace@hotmail.com",
                     CardNumber = "1-433-011-0980",
+                    Role ="Reader",
                 },
                     new Models.Reader
                 {
                     ReaderName = "Rey Dunno",
                     Email = "whoIsMyDaddy?@hotmail.com",
                     CardNumber = "1-433-011-0987",
+                    Role ="Reader",
                 },
                     new Models.Reader
                 {
                     ReaderName = "Kylo Ren",
                     Email = "emoBitch@hotmail.com",
                     CardNumber = "1-433-011-0990",
+                    Role ="Reader",
                 },
                     new Models.Reader
                 {
                     ReaderName = "Padme Amidala",
                     Email = "naughtyCougar@hotmail.com",
                     CardNumber = "1-433-011-0991",
+                    Role ="Reader",
                 },
                     new Models.Reader
                 {
                     ReaderName = "Jabba Hut",
                     Email = "HotForSlaves@hotmail.com",
                     CardNumber = "1-433-011-0988",
+                    Role ="Reader",
                 },
             });
             context.SaveChanges();
@@ -276,6 +289,7 @@ namespace Library.Migrations
                     Title = "Moby Dick",
                     YearPublished = 1851,
                     IsbnNumber = "978-3-16-148411-0",
+                    Author = context.Authors.First(a => a.FullName == "Herman Melville"),
                     Genre = context.Genres.First(g => g.DisplayName == "Adventure"),
                 },
                     new Models.BooksData

@@ -60,5 +60,11 @@ namespace Library.Controllers
             db.SaveChanges();
             return book;
         }
+        [Route("library/itemsout")]
+        [HttpGet]
+        public IQueryable<Models.CheckOut> GetItemsOut(string email)
+        {
+            return db.CheckOutLedger.Where(r => r.Reader.Email == email);
+        }
     }
 }
